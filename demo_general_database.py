@@ -22,11 +22,11 @@ class VerifiableDatabase(VerifiableBase):
 
   # Example database operation
   def set(self, key, value):
-    self._log.append(json.dumps({'operation': 'set', 'key': key, 'value': value}))
+    self._log.append(json.dumps({'operation': 'set', 'key': key, 'value': value}, sort_keys=True))
 
   # Example database operation
   def delete(self, key):
-    self._log.append(json.dumps({'operation': 'delete', 'key': key}))
+    self._log.append(json.dumps({'operation': 'delete', 'key': key}, sort_keys=True))
 
   # Return a value for a key and given tree_size (as returned by get_tree_head)
   # Also returns proof

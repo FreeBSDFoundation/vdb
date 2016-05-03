@@ -11,7 +11,7 @@ Type "help" to get started.
 Value:      0
 Proof:      [256]
 Map hash:   nP1psZp1bu3jrY5Yv89rI+w5ywe9lLqI2qZi5ibTSF0=
-Log hash:   lkr1xY8VW6cxvpGUsD2yqiTrjc0b0ODtQjuoZAe6gZM=
+Log hash:   nw1BftKV3WK0mRE2nWVCWHjpCJ3puUOYqtw6Vhrn0ZM=
 Tree size:  1
 > dump
 Tree:
@@ -22,7 +22,7 @@ P:110010101001011110000001000100101100101000011011101111011100101011111010110000
 Value:      1
 Proof:      ['daMAkHf1WBaMcAV3TG5yX2BpEJ/qBUXyhxgEY0UGTIA=', 255]
 Map hash:   EJ1Rw6DQT9bDn2Zbn7u+9/j799PSdqT9gfBymS9MBZY=
-Log hash:   sgshxO2oKRkhu05c/f/lszSh8q1CEz7fU8cpB8zcSFA=
+Log hash:   cRnXi7G3uNDytU9qn/EejnioN1GbEGU5GBO4/D5Pp3s=
 Tree size:  2
 > dump
 Tree:
@@ -39,12 +39,12 @@ R:
 Value:      2
 Proof:      ['q1BN5wwrHEONK2qXNLgp1pJh8QbeyvHlczCmEa6rphQ=', 255]
 Map hash:   2rAZz4HJAMJqJ5c8ClS4wEzTP71GTdjMZMe1rKWPA5o=
-Log hash:   dMrfwICbRqwu6jO5bE8psiJ51j56f5U+icJzUCjN1qk=
+Log hash:   jFwh75O8Lnia3xkBCqzzBAJioWxKHCv7cLTXNcal/gw=
 Tree size:  3
 > log
-0 {"operation": "set", "value": "0", "key": "a"}
-1 {"operation": "set", "value": "1", "key": "b"}
-2 {"operation": "set", "value": "2", "key": "a"}
+0 {"key": "a", "operation": "set", "value": "0"}
+1 {"key": "b", "operation": "set", "value": "1"}
+2 {"key": "a", "operation": "set", "value": "2"}
 > get a 0
 Value:      None
 Proof:      [256]
@@ -55,19 +55,19 @@ Tree size:  0
 Value:      0
 Proof:      [256]
 Map hash:   nP1psZp1bu3jrY5Yv89rI+w5ywe9lLqI2qZi5ibTSF0=
-Log hash:   lkr1xY8VW6cxvpGUsD2yqiTrjc0b0ODtQjuoZAe6gZM=
+Log hash:   nw1BftKV3WK0mRE2nWVCWHjpCJ3puUOYqtw6Vhrn0ZM=
 Tree size:  1
 > get a 2
 Value:      0
 Proof:      ['q1BN5wwrHEONK2qXNLgp1pJh8QbeyvHlczCmEa6rphQ=', 255]
 Map hash:   EJ1Rw6DQT9bDn2Zbn7u+9/j799PSdqT9gfBymS9MBZY=
-Log hash:   sgshxO2oKRkhu05c/f/lszSh8q1CEz7fU8cpB8zcSFA=
+Log hash:   cRnXi7G3uNDytU9qn/EejnioN1GbEGU5GBO4/D5Pp3s=
 Tree size:  2
 > get a 3
 Value:      2
 Proof:      ['q1BN5wwrHEONK2qXNLgp1pJh8QbeyvHlczCmEa6rphQ=', 255]
 Map hash:   2rAZz4HJAMJqJ5c8ClS4wEzTP71GTdjMZMe1rKWPA5o=
-Log hash:   dMrfwICbRqwu6jO5bE8psiJ51j56f5U+icJzUCjN1qk=
+Log hash:   jFwh75O8Lnia3xkBCqzzBAJioWxKHCv7cLTXNcal/gw=
 Tree size:  3
 > save foo
 ```
