@@ -1,5 +1,3 @@
-import cPickle as pickle
-
 from verifiable_log import VerifiableLog
 from verifiable_map import VerifiableMap
 

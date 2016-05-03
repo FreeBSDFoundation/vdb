@@ -1,5 +1,8 @@
 import json, sys, cmd
-import cPickle as pickle
+try:
+  import cPickle as pickle
+except ImportError:
+  import pickle
 
 from verifiable_base import VerifiableBase
 from verifiable_log import VerifiableLog
