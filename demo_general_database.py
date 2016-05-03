@@ -1,4 +1,5 @@
 import json, sys, cmd
+import codecs
 try:
   import cPickle as pickle
 except ImportError:
@@ -17,32 +18,32 @@ class VerifiableDatabase(VerifiableBase):
 
   # Private, call back for the underlying map when new entries are sequenced by the log
   def _apply_operation(self, idx, operation, map):
-    op = json.loads(operation)
+    op = json.loads(codecs.decode(operation, 'utf-8'))
     if op['operation'] == 'set':
-      map.put(str(op['key']), str(op['value']))
+      map.put(str(op['key']), codecs.encode(str(op['value']), 'utf-8'))
     elif op['operation'] == 'delete':
-      map.put(str(op['key']), '')
+      map.put(str(op['key']), b'')
 
   # Example database operation
   def set(self, key, value):
-    self._log.append(json.dumps({'operation': 'set', 'key': key, 'value': value}, sort_keys=True))
+    self._log.append(codecs.encode(json.dumps({'operation': 'set', 'key': key, 'value': value}, sort_keys=True), 'utf-8'))
 
   # Example database operation
   def delete(self, key):
-    self._log.append(json.dumps({'operation': 'delete', 'key': key}, sort_keys=True))
+    self._log.append(codecs.encode(json.dumps({'operation': 'delete', 'key': key}, sort_keys=True), 'utf-8'))
 
   # Return a value for a key and given tree_size (as returned by get_tree_head)
   # Also returns proof
   def get(self, key, tree_size):
     val, proof = VerifiableBase.get(self, str(key), tree_size)
-    val = str(val) if len(val) else None
+    val = codecs.decode(val, 'utf-8') if len(val) else None
     return val, proof
 
 # Test right val is returned and inclusion proof checks out
 def test(db, query, tree_size, exp_val):
   val, proof = db.get(query, tree_size)
   assert val == exp_val
-  assert recalc_tree_hash(query, str(val) if val else '', proof) == db.get_tree_head(tree_size)['sha256_root_hash']
+  assert recalc_tree_hash(query, val if val else '', proof) == db.get_tree_head(tree_size)['sha256_root_hash']
 
 
 class ReplCmd(cmd.Cmd):
