@@ -159,6 +159,10 @@ class ReplCmd(cmd.Cmd):
   def help_log(self):
     print 'log - dump all ops'
 
+  def do_EOF(self, line):
+    print('')
+    return True
+
 
 db = VerifiableDatabase()
 db.set('foo', 'bar')
