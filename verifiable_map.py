@@ -1,4 +1,4 @@
-import hashlib, base64, sys, codecs
+import hashlib, base64, sys, codecs, six
 
 from verifiable_log import VerifiableLog
 
@@ -173,7 +173,7 @@ class Node:
 
 # Take a key as string and produce 256 boolean values indicating left (False) or right (True)
 def construct_key_path(key):
-  return [x == '1' for x in ''.join(('%8s' % bin(ord(x))[2:]) for x in hashlib.sha256(key).digest())[:SHA_LEN]]
+  return [x & (0x80 >> y) > 0 for x in six.iterbytes(hashlib.sha256(codecs.encode(key, 'utf-8')).digest()) for y in range(8) ]
 
 # Take a proof array and replace any default values (ie empty trees) with the
 # count of how many consecutive there are.  Finally base64 encode each other one.
