@@ -35,9 +35,9 @@ class VerifiableLog:
       stack = []
       tree_size = end - start
       for idx, leaf in enumerate(self._entries[start:end]):
-        stack.append(hashlib.sha256(chr(0) + leaf).digest())
+        stack.append(hashlib.sha256(b'\x00' + leaf).digest())
         for _ in range(bin(idx).replace('b', '')[::-1].index('0') if idx + 1 < tree_size else len(stack) - 1):
-          stack[-2:] = [hashlib.sha256(chr(1) + stack[-2] + stack[-1]).digest()]
+          stack[-2:] = [hashlib.sha256(b'\x01' + stack[-2] + stack[-1]).digest()]
       rv = stack[0]
       self._cache[k] = rv
     return rv

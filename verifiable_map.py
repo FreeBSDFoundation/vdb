@@ -10,13 +10,13 @@ def hashit(x):
   return hashlib.sha256(x).digest()
 
 def hashleaf(x):
-  return hashit(chr(0) + x)
+  return hashit(b'\x00' + x)
 
 def hashparent(a, b):
-  return hashit(chr(1) + a + b)
+  return hashit(b'\x01' + a + b)
 
 # Pre-compute defaults for empty leaves
-DEFAULTS = [hashleaf('')]
+DEFAULTS = [hashleaf(b'')]
 for i in range(SHA_LEN):
   DEFAULTS.append(hashparent(DEFAULTS[-1], DEFAULTS[-1]))
 DEFAULTS = DEFAULTS[::-1]
