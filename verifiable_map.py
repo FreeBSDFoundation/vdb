@@ -1,4 +1,4 @@
-import hashlib, base64, sys
+import hashlib, base64, sys, codecs
 
 from verifiable_log import VerifiableLog
 
@@ -152,7 +152,7 @@ class Node:
 
   # Dump all info out for debugging
   def debug_dump(self, seq):
-    print(('  ' * self._depth) + "H: " + base64.b64encode(self.hash(seq)))
+    print(('  ' * self._depth) + "H: " + codecs.decode(base64.b64encode(self.hash(seq)), 'ascii'))
     v = self._value.get(seq)
     if v is None:
       x = self.left(seq)
@@ -160,15 +160,15 @@ class Node:
         print(('  ' * self._depth) + "L:")
         x.debug_dump(seq)
       else:
-        print(('  ' * self._depth) + "L: " + base64.b64encode(self.left_hash(seq)))
+        print(('  ' * self._depth) + "L: " + codecs.decode(base64.b64encode(self.left_hash(seq)), 'ascii'))
       x = self.right(seq)
       if x:
         print(('  ' * self._depth) + "R:")
         x.debug_dump(seq)
       else:
-        print(('  ' * self._depth) + "R: " + base64.b64encode(self.right_hash(seq)))
+        print(('  ' * self._depth) + "R: " + codecs.decode(base64.b64encode(self.right_hash(seq)), 'ascii'))
     else:
-        print(('  ' * self._depth) + "V:" + repr(v))
+        print(('  ' * self._depth) + "V:" + codecs.decode(v, 'utf-8'))
         print(('  ' * self._depth) + "P:" + ''.join([str(int(x)) for x in self.path(seq)]))
 
 # Take a key as string and produce 256 boolean values indicating left (False) or right (True)
