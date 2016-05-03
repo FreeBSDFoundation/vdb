@@ -331,8 +331,8 @@ class VerifiableMap:
 
 # Utility method for checking an inclusion proof
 def recalc_tree_hash(key, value, proof):
-  t = hashleaf(value)
-  for ch, p in zip(construct_key_path(key), decompress_proof(proof))[::-1]:
+  t = hashleaf(codecs.encode(value, 'utf-8'))
+  for ch, p in list(zip(construct_key_path(key), decompress_proof(proof)))[::-1]:
     if ch:
       t = hashparent(p, t)
     else:
